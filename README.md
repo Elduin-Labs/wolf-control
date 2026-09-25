@@ -1,80 +1,45 @@
-# Mod Template
+# Wolf Control
 
-The starting point for Elduin's Minecraft mods. Every mod in
-[Elduin-Labs](https://github.com/Elduin-Labs) is created from this repo.
+Summon wolves that stand perfectly still, and carry a detector that wraps every
+wolf nearby in a giant orange box.
 
-**Fabric only.** One source tree, built for more than one Minecraft version by
-[Stonecutter](https://stonecutter.kikugie.dev/).
+Built for a **Vivecraft (VR) server**. Vivecraft only goes up to Minecraft
+1.20.1, so this mod targets **1.19.4** — nothing newer would run in VR.
 
-Adapted from [rotgruengelb/stonecutter-mod-template](https://github.com/rotgruengelb/stonecutter-mod-template),
-with NeoForge and Forge removed.
+## What's in it
+
+**Wolf Detector.** Right-click it and you flip into creative mode and get a set
+of wings. Sneak + right-click and you drop back to survival — the detector keeps
+working either way. While you're holding one, every wolf within 64 blocks gets a
+giant orange box drawn round it, plus an orange glow that shines through walls.
+The glow is plain vanilla, so other players on the server see it even without
+the mod installed.
+
+**Wolf Caller.** Right-click a block and a wolf appears there with its brain
+switched off — it stands exactly where you put it and never wanders. Sneak +
+right-click a block and every still wolf you own jumps to that spot. That's the
+control part: they only move when you say so.
+
+**A chest to start with.** Join the server with no detector on you and a chest
+full of detectors and callers appears in the block in front of you. If there's
+nowhere to put a chest, the items go straight into your bag instead.
 
 ## Minecraft versions
 
 | version | Java |
 |---|---|
-| 1.21.11 | 21 |
-| 26.2 | 25 |
+| 1.19.4 | 17 |
 
-Gradle downloads whichever JDK a version needs, so only one JDK has to be
-installed locally.
-
-## Making a mod from this
-
-```bash
-gh repo create Elduin-Labs/<slug> --public --template Elduin-Labs/mod-template --clone
-cd <slug>
-python3 setup.py
-```
-
-`setup.py` asks for the mod id, name, package and so on, rewrites
-`stonecutter.properties.toml`, renames the mixin config and moves the Java
-sources into the right package. Delete it afterwards.
+Gradle downloads the JDK it needs, so nothing has to be installed by hand.
 
 ## Building
 
 ```bash
-./gradlew "Set active project to 1.21.11-fabric"
-./gradlew "1.21.11-fabric:build"
+./gradlew "Set active project to 1.19.4-fabric"
+./gradlew "1.19.4-fabric:build"
 ```
 
-Switching is optional: each version subproject regenerates its own sources, so
-the jar is correct either way. It's there to keep the shared tree and the IDE in
-the version you're reading. Never hand-edit `.sc_active_version` to do it —
-Stonecutter tracks the tree's current form and that desyncs it.
-
-To build everything:
-
-```bash
-./gradlew build
-```
-
-Jars land in `versions/<version>-fabric/build/libs/`.
-
-## Adding a Minecraft version
-
-Four places, and they must agree:
-
-1. `settings.gradle.kts` — the Stonecutter version list
-2. `stonecutter.properties.toml` — a `[fabric."<version>"]` block with the
-   Minecraft, Fabric API and Mod Menu versions
-3. `.github/workflows/release.yml` — the `minecraft` matrix, with the right Java
-4. `CLAUDE.md` — the facts table
-
-Every version you add is another full copy of Minecraft to download, decompile
-and remap. Keep the list short.
-
-## A note on memory
-
-`gradle.properties` deliberately sets `org.gradle.parallel=false` and
-`org.gradle.workers.max=2`. Building Minecraft is memory-hungry, and building
-several versions at once on an 8 GB machine will exhaust RAM. Leave these alone.
-
-## Releasing
-
-Push a `v<version>` tag. `.github/workflows/release.yml` builds every version and
-uploads one Modrinth file per Minecraft version, using the organization's
-`MODRINTH_TOKEN` secret and the repo's `MODRINTH_PROJECT_ID` variable.
+The jar lands in `versions/1.19.4-fabric/build/libs/`.
 
 ## Licence
 

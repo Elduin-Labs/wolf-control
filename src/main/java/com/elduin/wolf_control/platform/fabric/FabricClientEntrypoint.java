@@ -1,8 +1,9 @@
-package com.example.modtemplate.platform.fabric;
+package com.elduin.wolf_control.platform.fabric;
 
 //? fabric {
 
-import com.example.modtemplate.ModTemplate;
+import com.elduin.wolf_control.WolfControl;
+import com.elduin.wolf_control.client.WolfBoxRenderer;
 import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
 import net.fabricmc.api.ClientModInitializer;
 
@@ -11,7 +12,8 @@ public class FabricClientEntrypoint implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		ModTemplate.onInitializeClient();
+		WolfControl.onInitializeClient();
+		WolfBoxRenderer.register();
 	}
 
 }

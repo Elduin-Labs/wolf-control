@@ -1,38 +1,37 @@
 loomx.loom_version="1.16-SNAPSHOT"
 
-mod.id = "modtemplate"
-mod.name = "Mod Template"
-mod.group = "com.example"
+
+mod.id = "wolf_control"
+mod.name = "Wolf Control"
+mod.group = "com.elduin"
 mod.version = "1.0.0"
 mod.channel_tag = ""
-mod.description = "Example Description"
+mod.description = "Summon wolves that stand perfectly still, and a detector that wraps every wolf nearby in a giant orange box."
 mod.authors = ["Elduin"]
 mod.contributors = []
 mod.inception_year = "2026"
 mod.license.name = "MIT"
 mod.license.url = "https://opensource.org/licenses/MIT"
 mod.license.dist = "repo"
-mod.environment = "client_and_server"
-mod.sources_url = "https://github.com/Elduin-Labs/mod-template"
-mod.homepage_url = "https://github.com/Elduin-Labs/mod-template"
-mod.issues_url = "https://github.com/Elduin-Labs/mod-template/issues"
+mod.sources_url = "https://github.com/Elduin-Labs/wolf-control"
+mod.homepage_url = "https://github.com/Elduin-Labs/wolf-control"
+mod.issues_url = "https://github.com/Elduin-Labs/wolf-control/issues"
 mod.discord_url = ""
-
+mod.environment = "client_and_server"
 [[mod.pom.developers]]
 id = "elduin"
 name = "Elduin"
 url = "https://github.com/Elduin-Labs"
 
 # KEEP IN SYNC with the version list in settings.gradle.kts.
+#
+# 1.19.4 only: Vivecraft (VR Minecraft) supports up to 1.20.1, and 1.19.4 is
+# what the server runs. The Fabric Loader floor is deliberately an old 0.14.x so
+# the jar still loads on a Vivecraft-era Fabric install.
 [fabric]
-deps.fabric-loader = "0.19.5"
+deps.fabric-loader = "0.14.24"
 
-[fabric."1.21.11"]
-deps.minecraft = "1.21.11"
-deps.fabric-api = "0.141.6+1.21.11"
-deps.modmenu = "17.0.1-beta.1"
-
-[fabric."26.2"]
-deps.minecraft = "26.2"
-deps.fabric-api = "0.158.0+26.2"
-deps.modmenu = "20.0.1"
+[fabric."1.19.4"]
+deps.minecraft = "1.19.4"
+deps.fabric-api = "0.87.2+1.19.4"
+deps.modmenu = "6.3.1"

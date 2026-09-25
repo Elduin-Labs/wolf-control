@@ -7,13 +7,9 @@ stonecutter {
 	val (version, loader) = current.project.split('-', limit = 2)
 	properties.tags(version, loader)
 
-	replacements.string(current.parsed >= "1.21.11") {
-		replace("ResourceLocation", "Identifier")
-		replace("location()", "identifier()")
-	}
-	replacements.string(current.parsed >= "26.1.2") {
-		replace("FabricDataOutput", "FabricPackOutput")
-	}
+	// This mod targets a single Minecraft version (1.19.4, the newest Vivecraft
+	// supports), so there is nothing to translate between mapping eras. Sources
+	// are written against 1.19.4 Mojang mappings directly.
 }
 
 platform {
@@ -55,13 +51,6 @@ loom {
 		runDir = "run/"
 		environment = "server"
 		configName = "Fabric Server"
-	}
-}
-
-fabricApi {
-	configureDataGeneration {
-		outputDirectory = file("${rootDir}/versions/datagen/${sc.current.version.split("-")[0]}/src/main/generated")
-		client = true
 	}
 }
 

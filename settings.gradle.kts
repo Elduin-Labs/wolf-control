@@ -32,9 +32,10 @@ stonecutter {
 		fun fabric(version: String) =
 			version("$version-fabric", version).apply { buildscript = "build.fabric.gradle.kts" }
 
-		fabric("26.2")
-		fabric("1.21.11")
+		// Vivecraft (VR) supports Minecraft up to 1.20.1, so this mod targets
+		// 1.19.4 — the version Elduin's Vivecraft server runs.
+		fabric("1.19.4")
 
-		vcsVersion = "1.21.11-fabric"
+		vcsVersion = "1.19.4-fabric"
 	}
 }

@@ -1,0 +1,6 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "wolf_control:item/wolf_caller"
+	}
+}

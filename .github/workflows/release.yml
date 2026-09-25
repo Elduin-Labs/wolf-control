@@ -66,7 +66,7 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: "25"      # 25 runs Gradle for every version; toolchains pick 21 where needed
+          java-version: "21"      # 21 runs Gradle; the toolchain pulls Java 17 for 1.19.4
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Build every version
@@ -87,10 +87,8 @@ jobs:
       matrix:
         # KEEP IN SYNC with settings.gradle.kts.
         include:
-          - minecraft: "1.21.11"
-            java: "21"
-          - minecraft: "26.2"
-            java: "25"
+          - minecraft: "1.19.4"
+            java: "17"
     steps:
       - uses: actions/checkout@v5
       - uses: actions/download-artifact@v4

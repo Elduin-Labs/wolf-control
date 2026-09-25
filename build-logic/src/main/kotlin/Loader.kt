@@ -56,11 +56,21 @@ sealed class Loader(val id: String) {
 				},
 				accessWidener = "aw/${ctx.currentMcVersion}.accesswidener"
 					.takeIf { ctx.stonecutter.project.rootProject.file("src/main/resources/$it").exists() },
-				entrypoints = mapOf(
-					"main" to listOf("${ctx.modGroup}.${ctx.modId}.platform.fabric.FabricEntrypoint"),
-					"client" to listOf("${ctx.modGroup}.${ctx.modId}.platform.fabric.FabricClientEntrypoint"),
-					"fabric-datagen" to listOf("${ctx.modGroup}.${ctx.modId}.platform.fabric.datagen.FabricDataGeneratorEntrypoint")
-				),
+				entrypoints = buildMap {
+					put("main", listOf("${ctx.modGroup}.${ctx.modId}.platform.fabric.FabricEntrypoint"))
+					put("client", listOf("${ctx.modGroup}.${ctx.modId}.platform.fabric.FabricClientEntrypoint"))
+					// Only advertise datagen if this mod actually ships a generator.
+					// A mod with no recipes or loot tables deletes that package, and
+					// a manifest pointing at a class that is not there is a landmine.
+					val datagenPath = "src/main/java/${ctx.modGroup.replace('.', '/')}/${ctx.modId}" +
+						"/platform/fabric/datagen/FabricDataGeneratorEntrypoint.java"
+					if (ctx.stonecutter.project.rootProject.file(datagenPath).exists()) {
+						put(
+							"fabric-datagen",
+							listOf("${ctx.modGroup}.${ctx.modId}.platform.fabric.datagen.FabricDataGeneratorEntrypoint")
+						)
+					}
+				},
 				mixins = listOf("${ctx.modId}.mixins.json"),
 				depends = ctx.extension.dependencies.required.associate { it.modid.get() to it.fabricLikeVersionRange.get() },
 				recommends = ctx.extension.dependencies.optional.associate { it.modid.get() to it.fabricLikeVersionRange.get() },
