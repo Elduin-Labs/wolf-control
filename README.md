@@ -1,3 +1,5 @@
+<img src="src/main/resources/assets/icon.png" width="128" align="right">
+
 # Wolf Control
 
 Summon wolves that stand perfectly still, and carry a detector that wraps every
